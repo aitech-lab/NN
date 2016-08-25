@@ -1,0 +1,22 @@
+{
+  "name": "nn",
+  "version": "1.0.0",
+  "description": "Neural Networks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://peko:ratatosk@github.com/ailove-lab/nn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ailove-lab/nn/issues"
+  },
+  "homepage": "https://github.com/ailove-lab/nn#readme",
+  "dependencies": {
+    "mathjs": "^3.4.1"
+  }
+}
