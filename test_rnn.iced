@@ -26,3 +26,5 @@ X = tarin_words.map (l)->l[0..-2]
 Y = tarin_words.map (l)->l[1..-1]
 
 rnn = new RNN vs, hs
+
+rnn.calculate_loss X,Y
