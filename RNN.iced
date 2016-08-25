@@ -109,6 +109,7 @@ class RNN
             correct_prediction = r.map (id, j)-> yp[j][id]
             L+= -1 * correct_prediction.reduce ((u,v)->u+Math.log(v)),0
         L
+        
     calculate_loss: (x, y)=>
         N = y.reduce ((v, w)-> v+w.length), 0  
         @calculate_total_loss(x,y)/N
