@@ -10,7 +10,7 @@ import pymorphy2
 # load file
 
 try:
-    f = open(sys.argv[1], newline="\n")
+    f = open(sys.argv[1], encoding="utf-8", newline="\n")
     rows = csv.reader(f, delimiter=";", quotechar='"')
 except IndexError:
     print("Usage:")
