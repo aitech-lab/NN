@@ -1,3 +1,5 @@
+# fill it and rename to config.iced
+
 module.export = 
     twitter:
         consumer_key:        ''
