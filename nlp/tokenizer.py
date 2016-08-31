@@ -2,13 +2,9 @@
 # coding=utf-8
 
 import sys
-import pymorphy2
 import codecs
 import re
 import math
-
-stdin = codecs.getreader("utf-8")(sys.stdin)
-morph = pymorphy2.MorphAnalyzer()
 
 def tokenize(str):
     w = re.split(r"(\s+|[\"\'%!?.,:;\)\(=]+)", str)
@@ -25,7 +21,7 @@ def deurl(str):
 def denick(str):
     return re.sub(r"@[^\s]+", "NICK", str)
 
-def resmile(txt):
+def desmile(txt):
 
     # k - activation power
     # n - power multiplier
@@ -167,30 +163,67 @@ def resmile(txt):
         
     return txt
 
+def deemoji(txt):
+    
+    # 😉
+    n = 1.0
+    sm = u"[😉😊😋😌😍😏😘😚😜😝😻😼😽☺♥⭐🎉💋💓💕💖😇😈😎😗😙😛]+"
+    for s in re.findall(sm, txt):
+        l = len(s)
+        p = int ( round( math.tanh(l*n/k) *k ) )
+        txt = txt.replace(s," SP"+str(p)+" ", 1)
+    
+    # 😁
+    n = 2.0
+    sm = u"[😁😂😃😄😅😆😸😹😺😀]"
+    for s in re.findall(sm, txt):
+        l = len(s)
+        p = int ( round( math.tanh(l*n/k) *k ) )
+        txt = txt.replace(s," SP"+str(p)+" ", 1)
+    
+    # 😔
+    n =1.0
+    sm = u"[😒😓😔😡😢😣😤😰😱😲😳😵😷😾😿💔😮😯😐😑😕]+"
+    for s in re.findall(sm, txt):
+        l = len(s)
+        p = int ( round( math.tanh(l*n/k) *k ) )
+        txt = txt.replace(s," SN"+str(p)+" ", 1)
+    
+    # 😩
+    n = 2.0   
+    sm = u"[😞😠😥😨😩😪😫😭🙀😟😦😧😖]+"
+    for s in re.findall(sm, txt):
+        l = len(s)
+        p = int ( round( math.tanh(l*n/k) *k ) )
+        txt = txt.replace(s," SN"+str(p)+" ", 1)
+
 def dedigit(txt):
     return re.sub(r"([-+]*[0-9]+[-:.,хx/]*)+", " DGT ", txt)
 
 def dehash(txt):
     return txt.replace("#", " HSH ");
 
-for l in stdin:
-    print("-"*10)
+if __name__ == "__main__":
+    
+    stdin = codecs.getreader("utf-8")(sys.stdin)
 
-    l = cleanup(l)
+    for l in stdin:
+        print("-"*10)
     
-    s = deurl(l)
-    s = denick(s)
-    s = dedigit(s)
-    s = resmile(s)
-    # s = dehash(s)
-    s = cleanup(s)
-    
-    w = tokenize(s)
-    
-    print(l)
-    print(s)
-    print("|".join(w).encode("utf-8"))
-    
-    #p = morph.parse(l)
-    #print(p[0].normal_form.encode("utf-8"))
-    
+        l = cleanup(l)
+        
+        s = deurl(l)
+        s = denick(s)
+        s = dedigit(s)
+        s = desmile(s)
+        s = deemoji(s)
+        
+        # s = dehash(s)
+        s = cleanup(s)
+        
+        w = tokenize(s)
+        
+        print(l)
+        print(s)
+        print("|".join(w).encode("utf-8"))
+        
