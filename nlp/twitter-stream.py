@@ -43,6 +43,9 @@ def save_tweet(t):
     rdb.rpush('tweets', t)
     rdb.sadd('filter', m)
     
+    f = filter(lambda a: a != ' ', l)
+    rdb.lpush("morph", " ".join(list(f)))
+    
     for w in l:
        rdb.zincrby('word_stat', w, 1)
        
