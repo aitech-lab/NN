@@ -89,7 +89,7 @@ emoji_regex = (point)->
 
 deemoji = (t)->
     m = t.match(emoji)||[]
-    console.log "#{t} => [#{m.join("")}]" if m.length
+    console.log "#{t} => #{m.length}[#{m.join(" | ")}]" if m.length
     for s in m 
         # console.log s.codePointAt(0).toString(16), s
         code = s.codePointAt(0)
