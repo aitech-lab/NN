@@ -19,7 +19,7 @@ from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
 from keras.layers.embeddings import Embedding
 from keras.layers.recurrent import LSTM
-from keras.datasets import imdb
+from keras.callbacks import ModelCheckpoint
 
 print("Params:")
 print(sys.argv)
@@ -27,7 +27,7 @@ print(sys.argv)
 x_train = []
 y_train = []
 
-samples_max = 5000
+samples_max = 1000
 samples     = 0
 train = sys.argv[1]
 for l in open(train, "r"):
@@ -76,14 +76,16 @@ model.compile(loss='binary_crossentropy',
               optimizer='adam',
               #class_mode="binary"
               metrics=['accuracy'])
-
+              
+checkpointer = ModelCheckpoint(filepath="out/checkpoint.{epoch:02d}.h5", verbose=1)
 model.fit(
     x_train, y_train, 
     batch_size=batch_size, 
     nb_epoch=10,
     verbose=1,
-    shuffle=True
+    shuffle=True,
+    callbacks=[checkpointer]
 )
 
 print("Save model")
-model.save("output.h5")
+model.save("out/final.h5")

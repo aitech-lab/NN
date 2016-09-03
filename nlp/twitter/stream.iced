@@ -121,7 +121,7 @@ deemoji = (t)->
         r = emoji_regex code
         hex = code.toString(16)
         unless unknown_emoji[hex]
-            console.log "    0x#{hex}: [ 0.0  , 0.0  , 0.0  , 0.0  ] # #{s} ~ #{t}"
+            # console.log "    0x#{hex}: [ 0.0  , 0.0  , 0.0  , 0.0  ] # #{s} ~ #{t}"
             unknown_emoji[hex] = 1
     t
 
@@ -140,7 +140,7 @@ tokenize = (t)->
     t = t.replace /^\s/g, ''
 
     # t = t.split /\s/g
-    # console.log t
+    console.log t
 
 stream.on 'data', (event)->
     return unless event?.text

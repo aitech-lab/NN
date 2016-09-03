@@ -8,11 +8,10 @@ import vocabulary as voc
 voc.init()
 
 model = load_model("output.h5")
-
-x = np.array([voc.encode(u"Полная херня :("), voc.encode(u"Идите все в жопу уроды! Я вас ненавижу!")])
+tweets = [t for t in open("test-tweets.txt")]
+x = np.array([voc.encode(t) for t in tweets])
 x = sequence.pad_sequences(x, maxlen=100)
 
-print(x)
-result = model.predict_proba(x)
-
-print(result)
+results = model.predict_proba(x)
+for i, v in enumerate(results):
+    print(v[0],"\t", tweets[i])
