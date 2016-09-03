@@ -90,7 +90,7 @@ emoji_regex = (point)->
 deemoji = (t)->
     
     m = t.match(emoji)
-    return unless m?
+    return t unless m?
 
     console.log "#{t} => #{m.length}: [#{m.join(" | ")}]"
     for s in m 
