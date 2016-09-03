@@ -89,7 +89,7 @@ emoji_regex = (point)->
 
 deemoji = (t)->
     m = t.match(emoji)||[]
-    console.log "#{t} => #{m.length}[#{m.join(" | ")}]" if m.length
+    console.log "#{t} => #{m.length}: [#{m.join(" | ")}]" if m.length
     for s in m 
         # console.log s.codePointAt(0).toString(16), s
         code = s.codePointAt(0)
@@ -100,9 +100,9 @@ deemoji = (t)->
             t = t.replace r, "#".red
             # t = t.replace(r, ")".repeat( p)) if p>0    
             # t = t.replace(r, "(".repeat(-p)) if p<0    
-    console.log t if m.length
     
     m = t.match(emoji)||[]
+    console.log "#{t} => #{m.length}: [#{m.join(" | ")}]"
     for s in m 
         # console.log t
         hex = s.codePointAt(0).toString(16)
