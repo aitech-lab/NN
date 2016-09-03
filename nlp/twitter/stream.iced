@@ -109,7 +109,7 @@ deemoji = (t)->
         if sent
             p = Math.round 3.0*sent[3]
             r = emoji_regex code
-            t = t.replace(r, ")".repeat( p)) if p>0    
+            t = t.replace(r, ")".repeat( p)) if p>=0    
             t = t.replace(r, "(".repeat(-p)) if p<0    
     
     # second match, check if we have not replaced emoji
