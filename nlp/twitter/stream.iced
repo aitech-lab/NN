@@ -88,8 +88,11 @@ emoji_regex = (point)->
         new RegExp "\\u#{point}"
 
 deemoji = (t)->
-    m = t.match(emoji)||[]
-    console.log "#{t} => #{m.length}: [#{m.join(" | ")}]" if m.length
+    
+    m = t.match(emoji)
+    return unless m?
+
+    console.log "#{t} => #{m.length}: [#{m.join(" | ")}]"
     for s in m 
         # console.log s.codePointAt(0).toString(16), s
         code = s.codePointAt(0)
@@ -101,6 +104,7 @@ deemoji = (t)->
             # t = t.replace(r, ")".repeat( p)) if p>0    
             # t = t.replace(r, "(".repeat(-p)) if p<0    
     
+    # second match, check if we have not replaced emoji
     m = t.match(emoji)||[]
     console.log "#{t} => #{m.length}: [#{m.join(" | ")}]"
     for s in m 
