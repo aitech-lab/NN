@@ -7,7 +7,7 @@ import numpy as np
 import vocabulary as voc
 voc.init()
 
-model = load_model("output.h5")
+model = load_model("out/final.h5")
 tweets = [t for t in open("test-tweets.txt")]
 x = np.array([voc.encode(t) for t in tweets])
 x = sequence.pad_sequences(x, maxlen=100)

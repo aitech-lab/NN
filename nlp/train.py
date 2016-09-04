@@ -27,7 +27,7 @@ print(sys.argv)
 x_train = []
 y_train = []
 
-samples_max = 1000
+samples_max = 100000
 samples     = 0
 train = sys.argv[1]
 for l in open(train, "r"):
@@ -54,7 +54,7 @@ print("Loading {} cases from '{}' complete".format(len(x_train), train))
 max_features = 70000
 
 # words in sequence
-maxlen     = 100 
+maxlen     = 100
 batch_size = 32
 
 print('Pad sequences (samples x time)')
