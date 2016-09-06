@@ -17,5 +17,5 @@ await csv.parse data, {delimiter: ";"}, defer err, rows
 
 for row in rows
     tweet = row[3].replace /\r\n|\r|\n|\n\r|\t/g, " "
-    console.log "#{tweet}\t#{pos}"
+    console.log "#{tweet}"
     
