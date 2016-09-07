@@ -80,7 +80,7 @@ def desmile(txt):
     for s in re.findall(sm, txt):
         l = len( re.sub(r"[^\*]+",'',s) )
         p = int ( round( math.tanh(l*n/k) *k ) )
-        txt = txt.replace(s," SP"+str(p)+" ", 1)
+        txt = txt.replace(s," )"+str(p)+" ", 1)
     
     # <3
     n = 1.5
