@@ -84,7 +84,6 @@ desmile = (t)->
         t = t.replace s, " #{p}) "
     t
 
-unknown_emoji = {}
 
 # assumes point > 0xffff
 # http://crocodillon.com/blog/parsing-emoji-unicode-in-javascript
@@ -97,6 +96,7 @@ emoji_regex = (point)->
     else
         new RegExp "\\u#{point.toString(16)}"
 
+unknown_emoji = {}
 deemoji = (t)->
     
     m = t.match(emoji)
