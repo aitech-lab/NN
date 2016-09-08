@@ -6,8 +6,8 @@
 
 #include "cortex.h"
 
-#define SCREEN_W  800
-#define SCREEN_H  600
+#define SCREEN_W  500
+#define SCREEN_H  500
 
 unsigned int train_data = 1000;
 
@@ -42,10 +42,10 @@ int main(int argc, char *argv[]) {
     }
 
     SDL_LockSurface(screen);
-    SDL_FillRect(screen, NULL, 0x000080); 
+    // SDL_FillRect(screen, NULL, 0x000080); 
     cortex_train();
     
-    int scale = 5;
+    int scale = SCREEN_W/100;
     fann_type xy[2];
     fann_type* res;
     unsigned int col, r, g;
@@ -57,11 +57,11 @@ int main(int argc, char *argv[]) {
         res = cortex_run(xy);
         r =0; g = 0;
         if(res[0]>0.0) {
-          r = res[0]*255;
+          r = res[0]*0xA0;
         } else {
-          g = -res[0]*255;
+          g = -res[0]*0xA0;
         }
-        col = 0x0000007F|(r<<24)|(g<<16);
+        col = 0x0000000F|(r<<24)|(g<<16);
         boxColor(screen,
            i   *scale, 
            j   *scale,
@@ -74,10 +74,12 @@ int main(int argc, char *argv[]) {
     for(i=0; i<train_data; i++) {
       fann_type x = data->input[i][0]+50;
       fann_type y = data->input[i][1]+50;
-      if(data->output[i][0] > 0) {
+      if(data->output[i][0] > 0.1) {
         col = 0xFF00007F;
-      } else {
+      } else if(data->output[i][0] < -0.1) {
         col = 0x00FF007F;
+      } else {
+        col = 0x0000FF7F;
       }
       boxColor(screen, 
         (int)  x   *scale, 
