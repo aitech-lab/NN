@@ -40,11 +40,10 @@ int main(int argc, char *argv[]) {
     }
 
     SDL_LockSurface(screen);
-
     SDL_FillRect(screen, NULL, 0x000080); 
     
     cortex_train();
-
+    
     int scale = 5;
     fann_type xy[2];
     fann_type* res;
@@ -70,7 +69,7 @@ int main(int argc, char *argv[]) {
       }
     }
 
-    for(i=0; i<10; i++) {
+    for(i=0; i<100; i++) {
       fann_type x = data->input[i][0];
       fann_type y = data->input[i][1];
       if(data->output[i][0] > 0) {
