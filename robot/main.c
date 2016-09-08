@@ -9,6 +9,8 @@
 #define SCREEN_W  800
 #define SCREEN_H  600
 
+unsigned int train_data = 1000;
+
 int main(int argc, char *argv[]) {
 
   SDL_Event evt; 
@@ -27,7 +29,7 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-  cortex_init();
+  cortex_init(train_data);
 
   while(1) {
     while(SDL_PollEvent(&evt)) {
@@ -41,25 +43,25 @@ int main(int argc, char *argv[]) {
 
     SDL_LockSurface(screen);
     SDL_FillRect(screen, NULL, 0x000080); 
-    
     cortex_train();
     
     int scale = 5;
     fann_type xy[2];
     fann_type* res;
-    unsigned int col;
+    unsigned int col, r, g;
+    
     for(i=0; i<100;++i) {
       for(j=0; j<100; ++j) {
-        // http://www.ferzkopp.net/Software/SDL_gfx-2.0/
-        // lineColor(screen, x0, y0, x1, y1, 0xFFFFFFFF);
-        xy[0] = (fann_type) i;
-        xy[1] = (fann_type) j;
+        xy[0] = (fann_type) i-50;
+        xy[1] = (fann_type) j-50;
         res = cortex_run(xy);
-        if(*res > 0) {
-          col = 0xFF00004F;
+        r =0; g = 0;
+        if(res[0]>0.0) {
+          r = res[0]*255;
         } else {
-          col = 0x00FF004F;
+          g = -res[0]*255;
         }
+        col = 0x0000007F|(r<<24)|(g<<16);
         boxColor(screen,
            i   *scale, 
            j   *scale,
@@ -69,9 +71,9 @@ int main(int argc, char *argv[]) {
       }
     }
 
-    for(i=0; i<100; i++) {
-      fann_type x = data->input[i][0];
-      fann_type y = data->input[i][1];
+    for(i=0; i<train_data; i++) {
+      fann_type x = data->input[i][0]+50;
+      fann_type y = data->input[i][1]+50;
       if(data->output[i][0] > 0) {
         col = 0xFF00007F;
       } else {

@@ -5,7 +5,7 @@
 struct fann* ann;
 struct fann_train_data* data;
 
-void cortex_init();
+void cortex_init(unsigned int train_data);
 void cortex_destroy();
 
 void cortex_train();
