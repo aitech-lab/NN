@@ -52,8 +52,8 @@ int main(int argc, char *argv[]) {
     
     for(i=0; i<100;++i) {
       for(j=0; j<100; ++j) {
-        xy[0] = (fann_type) i-50;
-        xy[1] = (fann_type) j-50;
+        xy[0] = (fann_type) i;
+        xy[1] = (fann_type) j;
         res = cortex_run(xy);
         r =0; g = 0;
         if(res[0]>0.0) {
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
         } else {
           g = -res[0]*0xA0;
         }
-        col = 0x0000000F|(r<<24)|(g<<16);
+        col = 0x0000004F|(r<<24)|(g<<16);
         boxColor(screen,
            i   *scale, 
            j   *scale,
@@ -72,8 +72,8 @@ int main(int argc, char *argv[]) {
     }
 
     for(i=0; i<train_data; i++) {
-      fann_type x = data->input[i][0]+50;
-      fann_type y = data->input[i][1]+50;
+      fann_type x = data->input[i][0];
+      fann_type y = data->input[i][1];
       if(data->output[i][0] > 0.1) {
         col = 0xFF00007F;
       } else if(data->output[i][0] < -0.1) {
@@ -82,10 +82,10 @@ int main(int argc, char *argv[]) {
         col = 0x0000FF7F;
       }
       boxColor(screen, 
-        (int)  x   *scale, 
-        (int)  y   *scale,
-        (int) (x+1)*scale, 
-        (int) (y+1)*scale, 
+        (int)  x   *scale+1, 
+        (int)  y   *scale+1,
+        (int) (x+1)*scale-2, 
+        (int) (y+1)*scale-2, 
         col);
     }
 
