@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
         } else {
           g = -res[0]*0xA0;
         }
-        col = 0x0000004F|(r<<24)|(g<<16);
+        col = 0x00003F3F|(r<<24)|(g<<16);
         boxColor(screen,
            i   *scale, 
            j   *scale,
