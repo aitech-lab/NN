@@ -48,7 +48,7 @@ cortex_init(unsigned int train_data) {
         
         double sq = x*x+y*y;
         data->output[i][0] = (fann_type)( sq > 0.6 ? 1.0 :-1.0);
-        // data->output[i][0]*= x*y > 0 ? 1.0: -1.0;
+        data->output[i][0]*= x*y > 0 ? 1.0: -1.0;
         
         // data->output[i][0] = (fann_type)( sq < 2000 && sq > 500? 1: -1);
         // data->output[i][0] = ((int)(abs(x*3))%2)^((int)(abs(y*3))%2) ? 1 : -1;
