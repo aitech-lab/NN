@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     cortex_train();
     
     int scale = SCREEN_W/100;
-    fann_type xy[2];
+    fann_type xy[5];
     fann_type* res;
     unsigned int col, r, g;
     
@@ -54,6 +54,10 @@ int main(int argc, char *argv[]) {
       for(j=0; j<100; ++j) {
         xy[0] = (fann_type) i/50.0-1.0;
         xy[1] = (fann_type) j/50.0-1.0;
+        xy[2] = xy[0]*xy[0];
+        xy[3] = xy[1]*xy[1];
+        xy[4] = xy[1]*xy[0];
+
         res = cortex_run(xy);
         r = 0; g = 0;
         if(res[0]>0.0) {

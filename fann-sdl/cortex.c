@@ -4,10 +4,10 @@
 
 #include "cortex.h"
 
-const unsigned int num_input  = 2;
+const unsigned int num_input  = 5;
 const unsigned int num_layers = 3;
 const unsigned int num_output = 1;
-const unsigned int num_neurons_hidden = 9;
+const unsigned int num_neurons_hidden = 2;
 
 unsigned int num_train_data;
 
@@ -28,7 +28,7 @@ cortex_init(unsigned int train_data) {
     fann_set_activation_function_output(ann, FANN_SIGMOID_SYMMETRIC);
     // fann_randomize_weights(ann, -100, 100);
     // fann_set_training_algorithm(ann, FANN_TRAIN_INCREMENTAL);
-    // fann_set_learning_rate(ann, 0.001);
+    // fann_set_learning_rate(ann, 10.0);
 
     // status
     fann_print_connections(ann);
@@ -41,14 +41,17 @@ cortex_init(unsigned int train_data) {
         fann_type y = (fann_type) rand()/RAND_MAX*2.0-1.0;
         data->input[i][0] = x;
         data->input[i][1] = y;
-        // data->input[i][2] = x*x;
+        data->input[i][2] = x*x;
+        data->input[i][3] = y*y;
+        data->input[i][4] = x*y;
         // data->input[i][3] = y*y;
+        
         // data->input[i][4] = x*x*x;
         // data->input[i][5] = y*y*y;
-        
-        double sq = x*x+y*y;
-        data->output[i][0] = (fann_type)( sq > 0.6 ? 1.0 :-1.0);
-        data->output[i][0]*= x*y > 0 ? 1.0: -1.0;
+        double sq1 = x*x + y*y;
+        double sq2 = (x+0.3)*(x+0.3) + y*y;
+        data->output[i][0] = (fann_type)( sq1 < 0.75 && sq2 > 0.25 ? 1.0 :-1.0);
+        // data->output[i][0]*= x*y > 0 ? 1.0: -1.0;
         
         // data->output[i][0] = (fann_type)( sq < 2000 && sq > 500? 1: -1);
         // data->output[i][0] = ((int)(abs(x*3))%2)^((int)(abs(y*3))%2) ? 1 : -1;
