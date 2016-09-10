@@ -7,7 +7,7 @@
 const unsigned int num_input  = 2;
 const unsigned int num_layers = 3;
 const unsigned int num_output = 1;
-const unsigned int num_neurons_hidden = 20;
+const unsigned int num_neurons_hidden = 9;
 
 unsigned int num_train_data;
 
@@ -45,11 +45,13 @@ cortex_init(unsigned int train_data) {
         // data->input[i][3] = y*y;
         // data->input[i][4] = x*x*x;
         // data->input[i][5] = y*y*y;
+        
         double sq = x*x+y*y;
-        // data->output[i][0] = (fann_type)( sq < 2000 && sq > 500? 1: -1);
         data->output[i][0] = (fann_type)( sq > 0.6 ? 1.0 :-1.0);
-        data->output[i][0]*= x*y > 0 ? 1.0: -1.0;
-        // data->output[i][0] = ((int)x/34%2)^((int)y/34%2) ? 1 : -1;
+        // data->output[i][0]*= x*y > 0 ? 1.0: -1.0;
+        
+        // data->output[i][0] = (fann_type)( sq < 2000 && sq > 500? 1: -1);
+        // data->output[i][0] = ((int)(abs(x*3))%2)^((int)(abs(y*3))%2) ? 1 : -1;
         // data->output[i][0] = (fann_type)( x+y > 0 ? 1 : -1);
     }
     // fann_scale_train_data(data,-1.0, 1.0);
