@@ -6,8 +6,8 @@
 
 #include "cortex.h"
 
-#define SCREEN_W  500
-#define SCREEN_H  500
+#define SCREEN_W  600
+#define SCREEN_H  600
 
 unsigned int train_data = 1000;
 
@@ -50,12 +50,12 @@ int main(int argc, char *argv[]) {
     fann_type* res;
     unsigned int col, r, g;
     
-    for(i=0; i<100;++i) {
+    for(i=0; i<100; ++i) {
       for(j=0; j<100; ++j) {
-        xy[0] = (fann_type) i;
-        xy[1] = (fann_type) j;
+        xy[0] = (fann_type) i/50.0-1.0;
+        xy[1] = (fann_type) j/50.0-1.0;
         res = cortex_run(xy);
-        r =0; g = 0;
+        r = 0; g = 0;
         if(res[0]>0.0) {
           r = res[0]*0xA0;
         } else {
@@ -72,8 +72,8 @@ int main(int argc, char *argv[]) {
     }
 
     for(i=0; i<train_data; i++) {
-      fann_type x = data->input[i][0];
-      fann_type y = data->input[i][1];
+      fann_type x = (data->input[i][0]+1.0)*50.0;
+      fann_type y = (data->input[i][1]+1.0)*50.0;
       if(data->output[i][0] > 0.1) {
         col = 0xFF00007F;
       } else if(data->output[i][0] < -0.1) {

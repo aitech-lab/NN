@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-c -Wall -I/usr/local/include
-LDFLAGS=-lSDL_gfx -lSDLmain -lSDL -lfann -lm
+CFLAGS=-c -O3 -Wall -I/usr/local/include
+LDFLAGS=-lSDL_gfx -lSDLmain -lSDL -ldoublefann -lm
 SOURCES=main.c cortex.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=main

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fann.h"
+#include "doublefann.h"
 
 struct fann* ann;
 struct fann_train_data* data;
