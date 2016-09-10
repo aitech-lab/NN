@@ -11,9 +11,10 @@
 import re
 
 _smiles = [
+   [ 0.5, r"[:;=]-*[PpРр]+", r"[РрPp]"], # :P
    [ 1.0, r"[:;=]-*\)+"    , r"\)"    ], # :)
    [ 1.0, r"\){2,}"        , r"\)"    ], # ))
-   [ 1.0, r"[:;=]-*3+"     , r"3"     ], # :3
+   [ 1.0, r"[:;=]-*[3зЗ]+" , r"[3Зз]" ], # :3
    [ 1.0, r"(<|&lt\;)[3З]+", r"[3З]"  ], # <3
    [ 1.5, r"[xXхХ]-*\)+"   , r"\)"    ], # X)
    [ 1.5, r"[:;=]-*\*+"    , r"\*"    ], # :*
@@ -28,7 +29,7 @@ _smiles = [
    [ 0.5, r"[OoОо0]_+[OoОо0]"  , r"_" ], # о_О
    [ 1.5, r"\*_*\*"            , r"_" ], # *_*
    [ 2.0, r"(&gt;|>)_+(&lt;|<)", r"_" ], # >_<
-   [-1.0, r"Т_+Т"              , r"_" ], # Т_Т
+   [-1.0, r"[тТT]_+[тТT]"      , r"_" ], # Т_Т
 ]
 
 # _emoji_match = r"[\u2600-\u26FF\u2700-\u27BF\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF]|\uD83D[\uDE00-\uDE4E]"
@@ -93,7 +94,6 @@ def resmile(string):
         _init_emoji()
 
     match = re.findall(re.compile(_emoji_match, re.UNICODE), string)
-    print(match)
     if match != None:
         for m in match:
             t = _emoji.get(m, 0)
