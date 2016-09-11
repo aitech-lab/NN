@@ -28,6 +28,8 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
+  printf("Press 'R' to randomize weights\n\n");
+  
   cortex_init(train_data);
   int k = 0;
   while(1) {
@@ -41,6 +43,7 @@ int main(int argc, char *argv[]) {
       if(evt.type == SDL_KEYUP){
         if(evt.key.keysym.sym == SDLK_ESCAPE) goto finish;
         if(evt.key.keysym.sym == SDLK_r) cortex_randomize();
+        boxColor(screen, 0, 0, SCREEN_W, SCREEN_H, 0x00000FF); 
       }
 
     }
@@ -56,7 +59,7 @@ int main(int argc, char *argv[]) {
       fann_type* y = data->output[i];
       pixelColor(screen, 
         (int)x[0]+train_data/2, SCREEN_H - (int)y[0],
-        0xFFFFFF7F);
+        0xFFFFFF1F);
     }
 
     fann_type x[1];

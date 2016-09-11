@@ -3,7 +3,7 @@ FANN + SDL binding
 
 Solution field visualisation for an simple NN model
 
-<!-- ![](./screenshoot.png) -->
+![](./screenshoot.png)
 ![](./convergence.gif)
 
 The functions are described with functions where

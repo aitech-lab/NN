@@ -8,19 +8,26 @@
 const unsigned int num_input  = 1;
 const unsigned int num_layers = 4;
 const unsigned int num_output = 1;
-const unsigned int num_neurons_hidden = 9;
+const unsigned int num_neurons_hidden = 20;
+const unsigned int g_count = 10;
 
 unsigned int num_train_data;
 
-void
-cortex_init(unsigned int train_data) {
+void generate_train_data();
 
-    num_train_data = train_data;
+double 
+rnd(double s) {return (double)rand()/RAND_MAX*s;}
+
+
+void
+cortex_init(unsigned int size_of_train_data) {
+
+    num_train_data = size_of_train_data;
 
     ann = fann_create_standard(
         num_layers,            
         num_input,          // 0 input
-        num_neurons_hidden, // 1 hidden
+        1,                  // 1 hidden
         num_neurons_hidden, // 2 hidden
         // num_neurons_hidden, // 2 hidden
         num_output);        // 5 output
@@ -46,16 +53,31 @@ cortex_init(unsigned int train_data) {
     // status
     fann_print_connections(ann);
     // fann_print_parameters(ann);
+    data = NULL;
+    generate_train_data();
+}
 
-    unsigned int i;
+void
+generate_train_data(){
+    
+    if(data) fann_destroy_train(data);
+
+    unsigned int i,j;
     data = fann_create_train(num_train_data, num_input, num_output);
     fann_type x, y;
+    fann_type k[g_count][3];
+    for(i=0; i<g_count; i++) {
+        k[i][0] = rnd(1000.0)-500.0; // x offset
+        k[i][1] = rnd(100.0)+20;    // width
+        k[i][2] = rnd( 50.0)+50;    // height
+    }
+    
     for(i=0; i<num_train_data; i++) {
         x = (fann_type) i-num_train_data/2;
-        y = exp(-pow((x+200.0)/ 50, 2))*150 + 
-            exp(-pow((x+100.0)/100, 2))*100 +
-            exp(-pow((x+350.0)/100, 2))* 50 +
-            exp(-pow((x-100.0)/250, 2))*200;
+        y = 0;
+        for(j=0; j<g_count; j++)
+            y+=exp(-pow((x+k[j][0])/k[j][1], 2))*k[j][2];
+
         data->input[i][0]  = x;
         data->output[i][0] = y;
     }
@@ -73,6 +95,7 @@ cortex_train() {
 
 void
 cortex_randomize() {
+    generate_train_data();
     fann_randomize_weights(ann, -1.0, 1.0);
 }
 
