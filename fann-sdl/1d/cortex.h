@@ -10,3 +10,4 @@ void cortex_destroy();
 
 void cortex_train();
 fann_type* cortex_run(fann_type* data);
+void cortex_randomize();
