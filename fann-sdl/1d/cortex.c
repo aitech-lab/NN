@@ -6,7 +6,7 @@
 #include "cortex.h"
 
 const unsigned int num_input  = 1;
-const unsigned int num_layers = 3;
+const unsigned int num_layers = 4;
 const unsigned int num_output = 1;
 const unsigned int num_neurons_hidden = 9;
 
@@ -21,16 +21,24 @@ cortex_init(unsigned int train_data) {
         num_layers,            
         num_input,          // 0 input
         num_neurons_hidden, // 1 hidden
-        // num_neurons_hidden, // 2 hidden
+        num_neurons_hidden, // 2 hidden
         // num_neurons_hidden, // 2 hidden
         num_output);        // 5 output
-
-    // FANN_SIGMOID_SYMMETRIC
-    fann_set_activation_function_hidden(ann, FANN_GAUSSIAN);
-    // fann_set_activation_function_layer(ann, FANN_SIGMOID, 0);
-    // fann_set_activation_function_layer(ann, FANN_GAUSSIAN,1);
+    
+    // http://libfann.github.io/fann/docs/files/fann_data-h.html#fann_activationfunc_enum
+    
+    /*
+        1) x 
+        2) l1 = s*dot(x, L1)            
+        4) l2 = exp(-dot(l1, L2)^2)
+        5) y = sum(l2) 
+    */
+    fann_set_activation_function_layer (ann, FANN_LINEAR  , 1); // hidden 1
+    fann_set_activation_steepness_layer(ann,      1e-6    , 1);
+    fann_set_activation_function_layer (ann, FANN_GAUSSIAN, 2); // hddden 2
     fann_set_activation_function_output(ann, FANN_LINEAR);
 
+    // fann_set_activation_function_hidden(ann, FANN_GAUSSIAN);
     // fann_set_learning_rate(ann, 0.00001);
     // fann_randomize_weights(ann, -100, 100);
     // fann_set_training_algorithm(ann, FANN_TRAIN_INCREMENTAL);
