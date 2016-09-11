@@ -6,7 +6,7 @@
 #include "cortex.h"
 
 const unsigned int num_input  = 1;
-const unsigned int num_layers = 4;
+const unsigned int num_layers = 3;
 const unsigned int num_output = 1;
 const unsigned int num_neurons_hidden = 20;
 const unsigned int g_count = 10;
@@ -27,7 +27,7 @@ cortex_init(unsigned int size_of_train_data) {
     ann = fann_create_standard(
         num_layers,            
         num_input,          // 0 input
-        1,                  // 1 hidden
+        // 1,                  // 1 hidden
         num_neurons_hidden, // 2 hidden
         // num_neurons_hidden, // 2 hidden
         num_output);        // 5 output
@@ -40,10 +40,11 @@ cortex_init(unsigned int size_of_train_data) {
         4) l2 = exp(-dot(l1, L2)^2)
         5) y = sum(l2) 
     */
-    fann_set_activation_function_layer (ann, FANN_LINEAR  , 1); // hidden 1
-    fann_set_activation_steepness_layer(ann,      1e-6    , 1);
-    fann_set_activation_function_layer (ann, FANN_GAUSSIAN, 2); // hddden 2
-    fann_set_activation_function_output(ann, FANN_LINEAR);
+    // fann_set_activation_function_layer (ann, FANN_LINEAR  , 1); // hidden 1
+    // fann_set_activation_steepness_layer(ann,      1e-6    , 1);
+    fann_set_activation_function_layer (ann, FANN_GAUSSIAN, 1);   // hidden 2
+    fann_set_activation_steepness_layer(ann,      1e-2    , 1);
+    fann_set_activation_function_output(ann, FANN_LINEAR     );
 
     // fann_set_activation_function_hidden(ann, FANN_GAUSSIAN);
     // fann_set_learning_rate(ann, 0.00001);
