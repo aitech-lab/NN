@@ -60,27 +60,28 @@ def worker():
 
         q.task_done()
 
-cores = multiprocessing.cpu_count()*2
-# cores = 100
-print("Lauch",cores,"threads")
-for c in range(cores):
-    t = threading.Thread(target=worker)
-    t.start()
-    threads.append(t)
+cores = multiprocessing.cpu_count()
 
 lines = file.split("\n")
 print("Put",len(lines),"to queue")
 for l in file.split('\n'):
     if len(l)>0:
         q.put(l)
-print("Wait for processing end")
+
+print("Lauch",cores,"threads")
+for c in range(cores):
+    t = threading.Thread(target=worker)
+    t.start()
+    threads.append(t)
+
+print("Wait for queue empty")
 q.join()
 
 print("Stop workers")
 # stop workers
 for i in range(cores):
     q.put(None)
-print("Wait workers end")
+print("Wait all workers end")
 for t in threads:
     t.join()
 
