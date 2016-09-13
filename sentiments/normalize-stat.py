@@ -22,7 +22,12 @@ norm  = {} # norm-> count
 
 morph = pymorphy2.MorphAnalyzer()
 
+k = 0 
 for l in file:
+    k+=1
+    if k%1000 is 0:
+        print(k, end=" ")
+        
     f, w = l.split('\t')
     n = morph.parse(w)[0].normal_form
     norm[n] = norm.get(n,0) + int(f)
