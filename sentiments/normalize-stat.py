@@ -31,7 +31,7 @@ def write(fn, obj):
     print("Write",fn)
     fd = open(fn, "w")
     for k in sorted(obj, key=obj.get, reverse=True):
-        fd.write(k+"\t"+str(obj[k])+"\n")
+        fd.write(str(obj[k])+"\t"+k+"\n")
 
 write("norm.tsv", stat)
 # write("norm.tsv", norm)
