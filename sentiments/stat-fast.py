@@ -26,13 +26,14 @@ print("Loaded", len(file))
 
 stat  = {} # word-> count
 norm  = {} # norm-> count
+cache = {} # word-> norm
+
+morph = pymorphy2.MorphAnalyzer()
 
 q = queue.Queue()
 threads = []
 
 def worker():                               
-    morph = pymorphy2.MorphAnalyzer()
-    cache = {} # word-> norm
     print("worker start")
     k = 0
     while True:
