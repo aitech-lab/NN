@@ -2,10 +2,7 @@
 # coding=utf-8
 
 import re
-import pymorphy2
 from slang import cleanup
-
-morph = pymorphy2.MorphAnalyzer()
 
 stat = {}
 if __name__ == "__main__":
@@ -22,9 +19,8 @@ if __name__ == "__main__":
             continue
             
         for t in txt.split(" "):
-            n = morph.parse(t)[0].normal_form
-            stat[n] = stat.get(n,0)+1
+            t = t.lower()
+            stat[t] = stat.get(t,0)+1
             
 for word in sorted(stat, key=stat.get, reverse=True):
-    if stat[word]<2 : continue
-    print(word+"\t"+stat[word])
+    print(word+"\t"+str(stat[word]))
