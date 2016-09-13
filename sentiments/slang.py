@@ -43,7 +43,7 @@ def cleanup(l):
     txt = re.sub(r'([а-яА-ЯёЁс]{2,3})(\1{2,})', C.R+r'\1'+C.E, txt)
     
     # final cleanup
-    txt = re.sub(r'[^а-яА-ЯёЁ\-]+', ' ', txt)
+    txt = re.sub(r'[^а-яА-ЯёЁ]+'  , ' ', txt)
     txt = re.sub(r'\s-|-\s|^-|-$' , ' ', txt)
     txt = re.sub(r'^\s+|\s+$'     , '' , txt)
     txt = re.sub(r'\s{2,}'        , ' ', txt)
