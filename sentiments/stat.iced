@@ -8,7 +8,7 @@ rl = rl.createInterface
 words = {}
 k=0
 on_line = (l)->
-    console.error k if (++k)%100 
+    console.error k unless (++k)%1000
     l = l.replace /[^а-яА-ЯёЁ]+/g, " " 
     l = l.replace /\s{2,}/g," "
     w = l.split /\s+/g
