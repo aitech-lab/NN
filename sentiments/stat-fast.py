@@ -39,6 +39,7 @@ def worker():
         l = q.get()
         if k%100 == 0:
             print(q.qsize(), end=" ")
+            sys.stdout.flush()
             k+=1
         if l is None:
             break
