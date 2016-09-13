@@ -11,7 +11,7 @@ if len(sys.argv)!=2:
     sys.exit(0)
 
 try:
-    fd = open(sys.argv[1],'r')
+    file = open(sys.argv[1],'r')
 except:
     print("Can't open file")
     sys.exit(0)
