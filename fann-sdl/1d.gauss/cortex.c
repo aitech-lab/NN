@@ -33,7 +33,6 @@ cortex_init() {
         num_input,          // 0 input
         // 1,                  // 1 hidden
         num_neurons_hidden, // 2 hidden
-        // num_neurons_hidden, // 2 hidden
         num_output);        // 5 output
     
     // http://libfann.github.io/fann/docs/files/fann_data-h.html#fann_activationfunc_enum
@@ -58,7 +57,7 @@ generate_train_data(){
     fann_type x, y;
     fann_type k[g_count][3];
     for(i=0; i<g_count; i++) {
-        k[i][0] = rnd(1.00)-0.50; // x offset
+        k[i][0] = rnd(2.00)-1.00; // x offset
         k[i][1] = rnd(0.20)+0.10; // width
         k[i][2] = rnd(1.00)-0.50; // height
     }
