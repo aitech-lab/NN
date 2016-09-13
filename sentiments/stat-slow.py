@@ -44,9 +44,9 @@ def worker():
         if l is None:
             break
         try:
-            # (txt, tone) = cleanup(l)
-            txt = re.sub(r"[^a-яА-ЯёЁ]+", " ", l)
-            txt = re.sub(r"\s{2,}", " ", txt).lower()
+            (txt, tone) = cleanup(l)
+            # txt = re.sub(r"[^a-яА-ЯёЁ]+", " ", l)
+            # txt = re.sub(r"\s{2,}", " ", txt).lower()
         except:
             # q.task_done()
             continue
