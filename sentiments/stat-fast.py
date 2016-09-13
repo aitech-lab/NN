@@ -23,16 +23,16 @@ except:
 print("Loading file")
 file = fd.read()
 print("Loaded", len(file))
-morph = pymorphy2.MorphAnalyzer()
 
 stat  = {} # word-> count
 norm  = {} # norm-> count
-cache = {} # word-> norm
 
 q = queue.Queue()
 threads = []
 
 def worker():                               
+    morph = pymorphy2.MorphAnalyzer()
+    cache = {} # word-> norm
     print("worker start")
     k = 0
     while True:
@@ -60,7 +60,8 @@ def worker():
 
         q.task_done()
 
-cores = multiprocessing.cpu_count()
+# cores = multiprocessing.cpu_count()
+cores = 100
 print("Lauch",cores,"threads")
 for c in range(cores):
     t = threading.Thread(target=worker)
