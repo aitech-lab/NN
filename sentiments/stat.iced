@@ -6,8 +6,8 @@ rl = rl.createInterface
   # output: process.stdout
 
 words = {}
+k=0
 on_line = (l)->
-    k?=0
     console.err k if (++k)%100 
     l = l.replace /[^а-яА-ЯёЁ]+/g, " " 
     l = l.replace /\s{2,}/g," "
