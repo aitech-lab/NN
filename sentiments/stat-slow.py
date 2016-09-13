@@ -48,19 +48,19 @@ def worker():
             txt = re.sub(r"[^a-яА-ЯёЁ]+", " ", l)
             txt = re.sub(r"\s{2,}", " ", txt).lower()
         except:
-            q.task_done()
+            # q.task_done()
             continue
             
         for t in txt.split(" "):
             # count word
             stat[t] = stat.get(t, 0)+1
             # get norm
-            n = cache.get(t, None)
-            if n == None:
-                cache[t] = n = morph.parse(t)[0].normal_form
-            norm[n] = norm.get(n,0)+1
+            # n = cache.get(t, None)
+            # if n == None:
+            #     cache[t] = n = morph.parse(t)[0].normal_form
+            # norm[n] = norm.get(n,0)+1
 
-        q.task_done()
+        # q.task_done()
 
 cores = multiprocessing.cpu_count()
 
@@ -79,4 +79,4 @@ def write(fn, obj):
         fd.write(k+"\t"+str(obj[k])+"\n")
 
 write("stat.tsv", stat)
-write("norm.tsv", norm)
+# write("norm.tsv", norm)
