@@ -60,8 +60,8 @@ def worker():
 
         q.task_done()
 
-# cores = multiprocessing.cpu_count()
-cores = 100
+cores = multiprocessing.cpu_count()*2
+# cores = 100
 print("Lauch",cores,"threads")
 for c in range(cores):
     t = threading.Thread(target=worker)
