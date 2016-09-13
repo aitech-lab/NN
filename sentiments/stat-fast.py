@@ -38,10 +38,10 @@ def worker():
     k = 0
     while True:
         l = q.get()
+        k+=1
         if k%100 == 0:
             print(q.qsize(), end=" ")
             sys.stdout.flush()
-            k+=1
         if l is None:
             break
         try:
