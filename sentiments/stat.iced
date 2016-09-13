@@ -1,13 +1,14 @@
 #!/usr/bin/iced
 
 rl = require('readline');
-
 rl = rl.createInterface 
   input: process.stdin,
   # output: process.stdout
 
 words = {}
 on_line = (l)->
+    k?=0
+    console.err k if (++k)%100 
     l = l.replace /[^а-яА-ЯёЁ]+/g, " " 
     l = l.replace /\s{2,}/g," "
     w = l.split /\s+/g
