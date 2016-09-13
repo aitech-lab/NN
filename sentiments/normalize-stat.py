@@ -27,7 +27,6 @@ for l in file:
     k+=1
     if k%1000 is 0:
         print(k, end=" ")
-        
     f, w = l.split('\t')
     n = morph.parse(w)[0].normal_form
     norm[n] = norm.get(n,0) + int(f)
@@ -38,5 +37,4 @@ def write(fn, obj):
     for k in sorted(obj, key=obj.get, reverse=True):
         fd.write(str(obj[k])+"\t"+k+"\n")
 
-write("norm.tsv", stat)
-# write("norm.tsv", norm)
+write("norm.tsv", norm)
