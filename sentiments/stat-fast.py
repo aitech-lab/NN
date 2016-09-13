@@ -34,9 +34,12 @@ threads = []
 
 def worker():                               
     print("worker start")
+    k = 0
     while True:
         l = q.get()
-
+        if k%100 == 0:
+            print(q.qsize(), end=" ")
+            k+=1
         if l is None:
             break
         try:

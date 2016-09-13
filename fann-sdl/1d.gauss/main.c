@@ -6,8 +6,8 @@
 
 #include "cortex.h"
 
-#define SCREEN_W 600
-#define SCREEN_H 600
+#define SCREEN_W 1200
+#define SCREEN_H  600
 
 unsigned int train_data = SCREEN_W;
 
@@ -59,14 +59,14 @@ int main(int argc, char *argv[]) {
       fann_type* x = data->input [i];
       fann_type* y = data->output[i];
       pixelColor(screen, 
-        SCREEN_W/2.0 + (int)(x[0]*SCREEN_W/2.0), 
+        SCREEN_W/2.0 + (int)(x[0]*SCREEN_H/2.0), 
         SCREEN_H/2.0 - (int)(y[0]*SCREEN_H/2.0),
         0xFFFFFF1F);
     }
 
     fann_type x[1];
     for(i=0; i<SCREEN_W; i++) {
-      x[0] = (fann_type)i/SCREEN_W*2.0-1.0;
+      x[0] = (fann_type)i/SCREEN_W*4.0-2.0;
       fann_type* y = cortex_run(x);
       pixelColor(screen,
         i, 

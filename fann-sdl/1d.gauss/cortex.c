@@ -11,7 +11,7 @@ const unsigned int num_output = 1;
 const unsigned int num_neurons_hidden = 20;
 const unsigned int g_count = 10;
 
-unsigned int train_size = 200;
+unsigned int train_size = 1000;
 
 void generate_train_data();
 
@@ -64,7 +64,7 @@ generate_train_data(){
     }
     
     for(i=0; i<train_size; i++) {
-        x = (fann_type) rnd(2.0)-1.0;
+        x = (fann_type) rnd(3.8)-1.9;
         y = 0.0;
         for(j=0; j<g_count; j++)
             y+= k[j][2] * exp(-pow((x+k[j][0])/k[j][1], 2)) + rnd(0.02);
