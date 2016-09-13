@@ -11,7 +11,7 @@ if len(sys.argv)!=2:
     sys.exit(0)
 
 try:
-    file = open(sys.argv[1],'r')
+    file = open(sys.argv[1], encoding="utf-8")
 except:
     print("Can't open file")
     sys.exit(0)
@@ -25,12 +25,12 @@ morph = pymorphy2.MorphAnalyzer()
 k = 0 
 for l in file:
     k+=1
-    if k%1000 is 0:
-        print(k, end=" ")
-        sys.stdout.flush()
+    l = l.replace("\n","")
     f, w = l.split('\t')
     n = morph.parse(w)[0].normal_form
     norm[n] = norm.get(n,0) + int(f)
+    if k%1000 is 0:
+        print(k, w,"->",n)
 
 def write(fn, obj):
     print("Write",fn)
