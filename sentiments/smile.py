@@ -99,8 +99,6 @@ def resmile(string):
             t = _emoji.get(m, 0)
             tone += t
             string = string.replace(m,'',1)
-            if t is 0:
-                print(t)
 
     return (string, tone)
 
