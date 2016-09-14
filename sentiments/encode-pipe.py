@@ -21,5 +21,5 @@ for l in stdin:
 
     k+=1
     if k%1000 is 0:
-        sys.stderr.write(k)
+        sys.stderr.write(str(k))
         sys.stderr.write("\n")
