@@ -62,10 +62,3 @@ def getword(id):
     if id>=len(id2word) or id<0:
         id = 0
     return id2word[id]
-
-if __name__ == "__main__":
-    init()
-    enc = encode(u"В лесу родилась ёлочка, в лесу она росла")
-    print(enc)
-    # print(word2id)
-    # print(id2word)
