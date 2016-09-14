@@ -36,7 +36,8 @@ def encode(sentence):
     try:
       s, tone = cleanup(sentence)
     except:
-      return []
+      return (0.0, [])
+
     s = s.lower()
     s = re.sub(r"[^а-яА-ЯёЁ]+", " ", s)
     s = re.sub(r"^\s+|\s+$","", s)
@@ -46,7 +47,8 @@ def encode(sentence):
         code = getid(w)
         if code > 0:
             codes.append(code)
-    return tone, codes
+    
+    return (tone, codes)
     
 def getid(word):
     global cache
