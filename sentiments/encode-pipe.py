@@ -15,7 +15,7 @@ k = 0
 for l in stdin:
 
     (tone, codes) = vocabulary.encode(l)
-    if(abs(tone)>0.2):
+    if(abs(tone)>0.2) and len(codes)>0:
         print('{:3.1f}'.format(tone), end="\t")
         print("\t".join(str(c) for c in codes))
 
