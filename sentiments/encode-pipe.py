@@ -11,8 +11,15 @@ stat = {}
 vocabulary.init()
                                 
 stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8')
+k = 0
 for l in stdin:
+
     (tone, codes) = vocabulary.encode(l)
     if(abs(tone)>0.2):
         print('{:3.1f}'.format(tone), end="\t")
         print("\t".join(str(c) for c in codes))
+
+    k++
+    if k%1000 is 0:
+        sys.stderr.write(k)
+        sys.stderr.write("\n")
