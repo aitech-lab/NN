@@ -15,7 +15,7 @@ if len(sys.argv)!=2:
     sys.exit(0)
 
 try:
-    fd = open(sys.argv[1],'r')
+    fd = open(sys.argv[1], encoding='utf-8')
 except:
     print("Can't open file")
     sys.exit(0)
@@ -37,30 +37,28 @@ def worker():
     k = 0
     while True:
         l = q.get()
-        k+=1
-        if k%100 == 0:
-            print(q.qsize(), end=" ")
-            sys.stdout.flush()
-        if l is None:
-            break
+
         try:
             (txt, tone) = cleanup(l)
-            # txt = re.sub(r"[^a-яА-ЯёЁ]+", " ", l)
-            # txt = re.sub(r"\s{2,}", " ", txt).lower()
         except:
             # q.task_done()
             continue
-            
+        t =''
+        n =''    
         for t in txt.split(" "):
             # count word
             stat[t] = stat.get(t, 0)+1
             # get norm
-            # n = cache.get(t, None)
-            # if n == None:
-            #     cache[t] = n = morph.parse(t)[0].normal_form
-            # norm[n] = norm.get(n,0)+1
+            n = cache.get(t, None)
+            if n == None:
+                cache[t] = n = morph.parse(t)[0].normal_form
+            norm[n] = norm.get(n,0)+1
 
-        # q.task_done()
+        k+=1
+        if k%1000 == 0:
+            print(q.qsize(),t,'->',n)
+        if l is None:
+            break
 
 cores = multiprocessing.cpu_count()
 
@@ -79,4 +77,4 @@ def write(fn, obj):
         fd.write(k+"\t"+str(obj[k])+"\n")
 
 write("stat.tsv", stat)
-# write("norm.tsv", norm)
+write("norm.tsv", norm)
