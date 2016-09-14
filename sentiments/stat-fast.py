@@ -15,7 +15,7 @@ if len(sys.argv)!=2:
     sys.exit(0)
 
 try:
-    fd = open(sys.argv[1],'r')
+    fd = open(sys.argv[1],encoding='utf-8')
 except:
     print("Can't open file")
     sys.exit(0)
@@ -37,21 +37,20 @@ def worker():
     print("worker start")
     k = 0
     while True:
-        l = q.get()
-        k+=1
-        if k%100 == 0:
-            print(q.qsize(), end=" ")
-            sys.stdout.flush()
+        l = q.get().lower()
+        
         if l is None:
             break
         try:
-            # (txt, tone) = cleanup(l)
-            txt = re.sub(r"[^a-яА-ЯёЁ]+", " ", l)
-            txt = re.sub(r"\s{2,}", " ", txt)
+            (txt, tone) = cleanup(l)
+            # txt = re.sub(r"[^a-яА-ЯёЁ]+", " ", l)
+            # txt = re.sub(r"\s{2,}", " ", txt).lower()
         except:
             q.task_done()
             continue
-            
+        
+        n = ''
+        t = ''    
         for t in txt.split(" "):
             # count word
             stat[t] = stat.get(t, 0)+1
@@ -60,7 +59,11 @@ def worker():
             if n == None:
                 cache[t] = n = morph.parse(t)[0].normal_form
             norm[n] = norm.get(n,0)+1
-
+        
+        k+=1
+        if k%1000 == 0:
+            print(q.qsize(), t,'->',n)
+        
         q.task_done()
 
 cores = multiprocessing.cpu_count()
