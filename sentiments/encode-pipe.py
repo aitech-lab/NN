@@ -19,7 +19,7 @@ for l in stdin:
         print('{:3.1f}'.format(tone), end="\t")
         print("\t".join(str(c) for c in codes))
 
-    k++
+    k+=1
     if k%1000 is 0:
         sys.stderr.write(k)
         sys.stderr.write("\n")
