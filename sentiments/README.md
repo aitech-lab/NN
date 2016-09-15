@@ -48,25 +48,3 @@ cnmem = 1
 
 Проверка нагрузки на gpu `nvidia-smi`
 
-
-
-python
-------
-
-encode-pipe.py
-normalize-stat.py
-slang.py
-smile.py
-stat-fast.py
-stat-norm.py
-stat-slow.py
-stemmer.py
-train.py
-vocabulary.py
-
-node
-----
-
-mystem.iced
-slang.iced
-stat.iced
