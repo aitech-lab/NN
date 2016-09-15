@@ -21,10 +21,11 @@ rl = readline.createInterface
 
 rl.on "line", (l)->
     score = parseFloat(l.split("\t", l)[0])
+    _ score
     if score > 0.0
-        pos.write l
+        pos.write "#{l}\n"
     else
-        neg.write l
+        neg.write "#{l}\n"
 
 rl.on "close", ()->
     pos.end()
