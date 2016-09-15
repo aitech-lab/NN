@@ -20,8 +20,7 @@ rl = readline.createInterface
     input: fs.createReadStream inp_name
 
 rl.on "line", (l)->
-    score = parseFloat(l.split("\t", l)[0])
-    _ score
+    score = parseFloat(l.split("\t", 1)[0])
     if score > 0.0
         pos.write "#{l}\n"
     else
