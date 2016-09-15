@@ -47,8 +47,8 @@ def load_data(file):
     y_data = np.array(y_data)
     return (x_data, y_data)
 
-x_train, y_train = load_data sys.argv[1]
-x_test , y_test  = load_data sys.argv[2]
+x_train, y_train = load_data(sys.argv[1])
+x_test , y_test  = load_data(sys.argv[2])
 
 print("Loading {} train cases from '{}' complete".format(len(x_train), sys.argv[1]))
 print("Loading {} test  cases from '{}' complete".format(len(x_test), sys.argv[2]))
