@@ -57,7 +57,7 @@ print("Loading {} test  cases from '{}' complete".format(len(x_test), sys.argv[2
 max_features = 37000
 
 # words in sequence
-maxlen     = 100
+maxlen     = 40
 batch_size = 32
 
 print('Pad sequences (samples x time)')
@@ -65,6 +65,9 @@ x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
 
 print("x_train shape:", x_train.shape)
 print("y_train shape:", y_train.shape)
+
+print("x_test shape:", x_train.shape)
+print("y_test shape:", y_train.shape)
 
 model = Sequential()
 model.add(Embedding(max_features, 128, input_length=maxlen))
@@ -82,7 +85,8 @@ model.compile(loss='binary_crossentropy',
               
 checkpointer = ModelCheckpoint(filepath="out/checkpoint.{epoch:02d}.h5", verbose=1)
 model.fit(
-    x_train, y_train, 
+    x_train, y_train,
+    validation_data=(x_test,y_test), 
     batch_size=batch_size, 
     nb_epoch=10,
     verbose=1,
