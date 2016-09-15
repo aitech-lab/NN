@@ -3,13 +3,10 @@
 
 import sys
 
-if len(sys.argv) != 2:
-    print("Usage:\n\t./train.py train_data.txt")
-    print("Train format:\n\tY0 [tab] X0 [tab] X1 [tab] ... Xn")
+if len(sys.argv) != 3:
+    print("Usage:\n\t./train.py train_data test_data")
+    print("Data format:\n\tY0 [tab] X0 [tab] X1 [tab] ... Xn")
     sys.exit(0)
-
-import vocabulary as voc
-voc.init()
 
 import numpy as np
 
@@ -27,31 +24,37 @@ print(sys.argv)
 x_train = []
 y_train = []
 
-samples_max = 100000
-samples     = 0
+x_test = []
+y_test = []
+
+samples_max = 200000
 train = sys.argv[1]
-for l in open(train, "r"):
-    d = l.split("\t")
+test  = sys.argv[2]
 
-    y = int(d[0]) 
-    x = [int(x) for x in d[1:]]
-    if y!=0 and y!=1 or len(x)==0:
-        print(l) 
-        continue
+def load_data(file): 
+    data_y = []
+    data_x = []
+    for l in open(file, "r"):
+        d = l.split("\t")
     
-    x_train.append(x)
-    y_train.append(y)
+        y = float(d[0])/10.0 
+        x = [int(x) for x in d[1:]]
+        
+        x_data.append(x)
+        y_data.append(y)
     
-    if samples > samples_max: break
-    samples += 1
-    
-x_train = np.array(x_train)
-y_train = np.array(y_train)
+    x_data = np.array(x_data)
+    y_data = np.array(y_data)
+    return (x_data, y_data)
 
-print("Loading {} cases from '{}' complete".format(len(x_train), train))
+x_train, y_train = load_data sys.argv[1]
+x_test , y_test  = load_data sys.argv[2]
+
+print("Loading {} train cases from '{}' complete".format(len(x_train), sys.argv[1]))
+print("Loading {} test  cases from '{}' complete".format(len(x_test), sys.argv[2]))
 
 # vocabulary size
-max_features = 70000
+max_features = 37000
 
 # words in sequence
 maxlen     = 100
