@@ -56,6 +56,7 @@ batch_size = 32
 
 print('Pad sequences (samples x time)')
 x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
+x_test  = sequence.pad_sequences(x_train, maxlen=maxlen)
 
 print("x_train shape:", x_train.shape)
 print("y_train shape:", y_train.shape)
