@@ -14,9 +14,12 @@ readline = require "readline"
 rl = readline.createInterface
     input: fs.createReadStream inp_name
 maxlen = 0
+minlen = 1000
 rl.on "line", (l)->
     len = l.split("\t").length
-    maxlen = len if len >maxlen
+    maxlen = len if len > maxlen
+    minlen = len if len < minlen
 
 rl.on "close", ()->
     _ "max sentence length is #{maxlen-1}"
+    _ "min sentence length is #{minlen-1}"
