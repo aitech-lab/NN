@@ -21,19 +21,13 @@ from keras.callbacks import ModelCheckpoint
 print("Params:")
 print(sys.argv)
 
-x_train = []
-y_train = []
-
-x_test = []
-y_test = []
-
 samples_max = 200000
 train = sys.argv[1]
 test  = sys.argv[2]
 
 def load_data(file): 
-    data_y = []
-    data_x = []
+    x_data = []
+    y_data = []
     for l in open(file, "r"):
         d = l.split("\t")
     
