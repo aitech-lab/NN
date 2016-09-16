@@ -3,8 +3,8 @@
 
 import sys
 
-if len(sys.argv) != 3:
-    print("Usage:\n\t./train.py train_data test_data")
+if len(sys.argv) != 2:
+    print("Usage:\n\t./train.py train_data")
     print("Data format:\n\tY0 [tab] X0 [tab] X1 [tab] ... Xn")
     sys.exit(0)
 
@@ -21,9 +21,15 @@ from keras.callbacks import ModelCheckpoint
 print("Params:")
 print(sys.argv)
 
-samples_max = 200000
+samples_max = 10000
+# vocabulary size
+max_features = 37000
+# words in sequence
+maxlen     = 40
+# samples for descent
+batch_size = 100
+
 train = sys.argv[1]
-test  = sys.argv[2]
 
 def load_data(file): 
     x_data = []
@@ -50,13 +56,6 @@ x_test , y_test  = load_data(sys.argv[2])
 
 print("Loading {} train cases from '{}' complete".format(len(x_train), sys.argv[1]))
 print("Loading {} test  cases from '{}' complete".format(len(x_test), sys.argv[2]))
-
-# vocabulary size
-max_features = 37000
-
-# words in sequence
-maxlen     = 40
-batch_size = 32
 
 print('Pad sequences (samples x time)')
 x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
@@ -85,7 +84,8 @@ model.compile(loss='binary_crossentropy',
 checkpointer = ModelCheckpoint(filepath="out/checkpoint.{epoch:02d}.h5", verbose=1)
 model.fit(
     x_train, y_train,
-    validation_data=(x_test, y_test), 
+    validation_split=0.1,
+    # validation_data=(x_test, y_test), 
     batch_size=batch_size, 
     nb_epoch=20,
     verbose=1,
