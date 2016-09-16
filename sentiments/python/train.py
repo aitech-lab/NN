@@ -30,8 +30,8 @@ def load_data(file):
     y_data = []
     for l in open(file, "r"):
         d = l.split("\t")
-    
-        y = float(d[0])/10.0 
+        
+        y = 0.5+float(d[0])/20.0 
         x = [int(x) for x in d[1:]]
         
         x_data.append(x)
@@ -71,7 +71,7 @@ model.add(LSTM(128))
 model.add(Dropout(0.5))
 #model.add(LSTM(128, dropout_W=0.2, dropout_U=0.2))  # try using a GRU 
 model.add(Dense(1))
-model.add(Activation('tanh'))
+model.add(Activation('sigmoid'))
 
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
