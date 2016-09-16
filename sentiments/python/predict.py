@@ -23,8 +23,7 @@ x = sequence.pad_sequences(x, maxlen=40)
 
 results = model.predict_proba(x)
 for i, v in enumerate(results):
-    print(
-        "{:3.2}".format(0.5+encoded[i][0]/20.0)+"\t"
+    print("{:3.2}".format(0.5+encoded[i][0]/20.0)+"\t"
         voc.decode(ecoded[i][1])+"\t"
         "{:3.2}".format(v[0])+"\t"
         tweets[i], end="")
