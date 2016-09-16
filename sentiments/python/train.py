@@ -21,13 +21,14 @@ from keras.callbacks import ModelCheckpoint
 print("Params:")
 print(sys.argv)
 
-samples_max = 200000
+samples_max = 10000
 train = sys.argv[1]
 test  = sys.argv[2]
 
 def load_data(file): 
     x_data = []
     y_data = []
+    samples_cnt = 0
     for l in open(file, "r"):
         d = l.split("\t")
         
@@ -36,7 +37,10 @@ def load_data(file):
         
         x_data.append(x)
         y_data.append(y)
-    
+        
+        if (samples_cnt+=1)>=samples_max:
+            break
+
     x_data = np.array(x_data)
     y_data = np.array(y_data)
     return (x_data, y_data)
@@ -81,7 +85,7 @@ model.compile(loss='binary_crossentropy',
 checkpointer = ModelCheckpoint(filepath="out/checkpoint.{epoch:02d}.h5", verbose=1)
 model.fit(
     x_train, y_train,
-    validation_data=(x_test,y_test), 
+    validation_data=(x_test, y_test), 
     batch_size=batch_size, 
     nb_epoch=20,
     verbose=1,
