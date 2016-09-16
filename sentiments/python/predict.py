@@ -27,5 +27,4 @@ for i, v in enumerate(results):
         "{:3.2}".format(0.5+encoded[i][0]/20.0)+"\t"
         voc.decode(ecoded[i][1]+"\t"
         "{:3.2}".format(v[0])+"\t"
-        tweets[i], 
-    end="")
+        tweets[i], end="")
