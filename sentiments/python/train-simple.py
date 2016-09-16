@@ -64,10 +64,10 @@ print("y_train shape:", y_train.shape)
 
 model = Sequential()
 model.add(Embedding(max_features, 128, input_length=maxlen))
-model.add(LSTM(128, return_sequences=True))
-model.add(LSTM(128))
-model.add(Dropout(0.5))
-#model.add(LSTM(128, dropout_W=0.2, dropout_U=0.2))  # try using a GRU 
+# model.add(LSTM(128, return_sequences=True))
+# model.add(LSTM(128))
+# model.add(Dropout(0.5))
+model.add(LSTM(128, dropout_W=0.2, dropout_U=0.2))  # try using a GRU 
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
 
@@ -82,7 +82,7 @@ model.fit(
     validation_split=0.1,
     # validation_data=(x_test, y_test), 
     batch_size=batch_size, 
-    nb_epoch=20,
+    nb_epoch=100,
     verbose=1,
     shuffle=True,
     callbacks=[checkpointer]
