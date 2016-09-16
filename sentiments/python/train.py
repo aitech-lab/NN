@@ -71,7 +71,7 @@ model.add(LSTM(128))
 model.add(Dropout(0.5))
 #model.add(LSTM(128, dropout_W=0.2, dropout_U=0.2))  # try using a GRU 
 model.add(Dense(1))
-model.add(Activation('sigmoid'))
+model.add(Activation('tanh'))
 
 model.compile(loss='binary_crossentropy',
               optimizer='adam',
