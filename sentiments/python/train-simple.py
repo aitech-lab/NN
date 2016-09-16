@@ -53,20 +53,14 @@ def load_data(file):
     return (x_data, y_data)
 
 x_train, y_train = load_data(sys.argv[1])
-# x_test , y_test  = load_data(sys.argv[2])
 
 print("Loading {} train cases from '{}' complete".format(len(x_train), sys.argv[1]))
-print("Loading {} test  cases from '{}' complete".format(len(x_test), sys.argv[2]))
 
 print('Pad sequences (samples x time)')
 x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
-x_test  = sequence.pad_sequences(x_train, maxlen=maxlen)
 
 print("x_train shape:", x_train.shape)
 print("y_train shape:", y_train.shape)
-
-print("x_test shape:", x_train.shape)
-print("y_test shape:", y_train.shape)
 
 model = Sequential()
 model.add(Embedding(max_features, 128, input_length=maxlen))

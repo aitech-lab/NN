@@ -65,8 +65,8 @@ x_test  = sequence.pad_sequences(x_train, maxlen=maxlen)
 print("x_train shape:", x_train.shape)
 print("y_train shape:", y_train.shape)
 
-print("x_test shape:", x_train.shape)
-print("y_test shape:", y_train.shape)
+print("x_test shape:", x_test.shape)
+print("y_test shape:", y_test.shape)
 
 model = Sequential()
 model.add(Embedding(max_features, 128, input_length=maxlen))
