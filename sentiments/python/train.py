@@ -83,7 +83,7 @@ model.fit(
     x_train, y_train,
     validation_data=(x_test,y_test), 
     batch_size=batch_size, 
-    nb_epoch=10,
+    nb_epoch=20,
     verbose=1,
     shuffle=True,
     callbacks=[checkpointer]
