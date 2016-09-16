@@ -64,7 +64,7 @@ print("y_train shape:", y_train.shape)
 
 model = Sequential()
 model.add(Embedding(max_features, 128, dropout=0.2))
-model.add(LSTM(128, dropout_W=0.2, dropout_U=0.2))  # try using a GRU 
+model.add(LSTM(128, dropout_W=0.2, dropout_U=0.2))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
 model.compile(loss='categorical_crossentropy',
