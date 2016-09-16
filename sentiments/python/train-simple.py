@@ -27,7 +27,7 @@ max_features = 37000
 # words in sequence
 maxlen     = 40
 # samples for descent
-batch_size = 100
+batch_size = 10
 
 train = sys.argv[1]
 
@@ -63,18 +63,15 @@ print("x_train shape:", x_train.shape)
 print("y_train shape:", y_train.shape)
 
 model = Sequential()
-model.add(Embedding(max_features, 128, input_length=maxlen))
-# model.add(LSTM(128, return_sequences=True))
-# model.add(LSTM(128))
-# model.add(Dropout(0.5))
+model.add(Embedding(max_features, 128, dropout=0.2))
 model.add(LSTM(128, dropout_W=0.2, dropout_U=0.2))  # try using a GRU 
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
-
-model.compile(loss='binary_crossentropy',
+model.compile(loss='mean_squared_error',
               optimizer='adam',
               #class_mode="binary"
               metrics=['accuracy'])
+
               
 checkpointer = ModelCheckpoint(filepath="out/checkpoint.{epoch:02d}.h5", verbose=1)
 model.fit(
