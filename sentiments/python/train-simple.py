@@ -44,7 +44,8 @@ def load_data(file):
         x_data.append(x)
         y_data.append(y)
 
-        if (samples_cnt+=1)>=samples_max:
+        samples_cnt+=1
+        if samples_cnt>=samples_max:
             break
 
     x_data = np.array(x_data)
