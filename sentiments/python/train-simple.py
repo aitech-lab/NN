@@ -27,7 +27,7 @@ max_features = 37000
 # words in sequence
 maxlen     = 40
 # samples for descent
-batch_size = 10
+batch_size = 32
 
 train = sys.argv[1]
 
@@ -38,7 +38,8 @@ def load_data(file):
     for l in open(file, "r"):
         d = l.split("\t")
         
-        y = 0.5+float(d[0])/20.0 
+        y = 1.0 if float(d[0])>0 else 0.0 
+
         x = [int(x) for x in d[1:]]
         
         x_data.append(x)
@@ -63,10 +64,13 @@ print("x_train shape:", x_train.shape)
 print("y_train shape:", y_train.shape)
 
 model = Sequential()
-model.add(Embedding(max_features, 128, dropout=0.2))
-model.add(LSTM(128, dropout_W=0.2, dropout_U=0.2))
+model.add(Embedding(max_features, 128, input_length=maxlen))
+model.add(LSTM(128, return_sequences=True))
+model.add(LSTM(128))
+model.add(Dropout(0.5))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
+
 model.compile(loss='binary_crossentropy',
               optimizer='rmsprop',
               metrics=['accuracy'])
