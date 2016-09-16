@@ -10,7 +10,7 @@ word2id = {}
 id2word = []
 morph = None
 
-def init(file="data/frequency-norm-cleaned.tsv"):
+def init(file="../data/frequency-norm-cleaned.tsv"):
 
     global morph
     global word2id 
