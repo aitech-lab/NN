@@ -51,8 +51,8 @@ def encode(sentence):
     return (tone, codes)
 
 def decode(codes):
-    return " ".join([id2word[c] for c in code])
-    
+    return " ".join([id2word[c] for c in codes])
+
 def getid(word):
     global cache
     norm = cache.get(word, None)
