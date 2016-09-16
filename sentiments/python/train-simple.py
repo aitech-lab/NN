@@ -67,9 +67,8 @@ model.add(Embedding(max_features, 128, dropout=0.2))
 model.add(LSTM(128, dropout_W=0.2, dropout_U=0.2))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
-model.compile(loss='categorical_crossentropy',
-              optimizer='adam',
-              #class_mode="binary"
+model.compile(loss='binary_crossentropy',
+              optimizer='rmsprop',
               metrics=['accuracy'])
 
               
