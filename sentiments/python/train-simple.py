@@ -21,7 +21,7 @@ from keras.callbacks import ModelCheckpoint
 print("Params:")
 print(sys.argv)
 
-samples_max = 10000
+samples_max = 100000
 # vocabulary size
 max_features = 37000
 # words in sequence

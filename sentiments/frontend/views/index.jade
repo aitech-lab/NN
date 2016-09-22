@@ -1,0 +1,72 @@
+extend layout
+
+block content
+  
+  //- .content
+  .pure-g
+    .pure-u-1-24
+    .pure-u-7-24
+      .header
+        h1 Neural Network
+        h2 Sentiment analysis
+
+      form.pure-u-1.pure-form#form: fieldset
+        legend Введите фразу (не более 40 слов)
+
+        input#input.pure-u-1(type="text", placeholder="Ура завтра в школу :D")
+      div(style="font-size:50%;")
+        | Двухслойная рекурентная сеть (128 LSTM нейронов / слой).
+        | Обучение на корпусе из 100K нормализованных твитов, размеченных смайлами.
+        | Словарь 37К нормализованных слов
+        | Точность предскзания после обучения 91%
+        br
+        b Оценки: 0.0 - негатив, 0.5 - нейтрально, 1.0 - позитив
+        br
+        | В обучающем корпусе исопользовались только явно окрашенные твиты, со смайлами.
+        | При этом сами смайлы удалялись. 
+        | Таким образом сеть строит предсказание опираясь только на текст.
+    .pure-u-1-24
+    .pure-u-14-24
+      h4 результаты
+      table.pure-table
+        thead
+          tr
+            th :)
+            th nn
+            th нормализация
+            th оригинал
+        tbody#table
+    .pure-u-1-24
+
+block scripts
+  script(type="text/javascript", charset="utf-8")
+    :coffeescript
+      socket = io()
+      getColor = (f)->
+        c = 0
+        if f<0.5
+          k = (1.0-f*2)
+          c = "rgba(#{127+k*128|0},#{k*128|0},#{k*128|0},#{k/2.0})"
+        else
+          k = (f*2-1.0)
+          c = "rgba(#{k*128|0},#{127+k*128|0},#{k*128|0},#{k/2.0})"
+        return c
+
+      $("#form").submit (e)->
+        e.preventDefault()
+        socket.emit "text", $("#input").val()
+        $("#input").val("")
+
+      table = $("#table")
+      socket.on "text", (text)->
+        d = text.split "\t"
+        s = getColor parseFloat d[0]
+        p = getColor parseFloat d[1]
+        table.prepend """
+        <tr>
+        <td style="background: #{getColor d[0]};">#{d[0]}</td>
+        <td style="background: #{getColor d[1]};">#{parseFloat(d[1]).toFixed(2)}</td>
+        <td>#{d[2]}</td>
+        <td>#{d[3]}</td>
+        </tr>
+        """
