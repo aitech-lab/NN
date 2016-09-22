@@ -6,7 +6,7 @@ params =
     cwd: "../python"
     stdio:['pipe', 'pipe', 'pipe']
 
-keras = spawn '/home/peko/Projects/nn/sentiments/python/env/bin/python', ["-u", "predict-pipe.py", "out/final.h5"], params
+keras = spawn '/home/v.seregin/Projects/nn/sentiments/python/env/bin/python', ["-u", "predict-pipe.py", "out/final.h5"], params
 
 # console.log process.env
 

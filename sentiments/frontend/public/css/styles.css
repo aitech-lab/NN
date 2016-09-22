@@ -1,3 +1,18 @@
+html {
+  font-family: 'Roboto', sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+th {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 300;
+}
+table {
+  width: 100%;
+}
 .disabled {
   pointer-events: none;
   cursor: default;

@@ -4,11 +4,9 @@ block content
   
   //- .content
   .pure-g
-    .pure-u-1-24
-    .pure-u-7-24
+    .pure-u-1.pure-u-md-8-24(style="padding-left:20px;")
       .header
-        h1 Neural Network
-        h2 Sentiment analysis
+        h2 Neural&nbsp;Network Sentiment&nbsp;analysis
 
       form.pure-u-1.pure-form#form: fieldset
         legend Введите фразу (не более 40 слов)
@@ -25,9 +23,9 @@ block content
         | В обучающем корпусе исопользовались только явно окрашенные твиты, со смайлами.
         | При этом сами смайлы удалялись. 
         | Таким образом сеть строит предсказание опираясь только на текст.
-    .pure-u-1-24
-    .pure-u-14-24
-      h4 результаты
+    .pure-u-1.pure-u-md-16-24(style="padding:0 20px 0 20px;")
+      .header
+        h2 Результаты
       table.pure-table
         thead
           tr
@@ -36,7 +34,6 @@ block content
             th нормализация
             th оригинал
         tbody#table
-    .pure-u-1-24
 
 block scripts
   script(type="text/javascript", charset="utf-8")
