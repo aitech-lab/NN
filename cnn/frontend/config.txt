@@ -1,0 +1,26 @@
+# fill it and save as config.iced
+
+module.exports = 
+    
+    projectName: "Project name"
+    
+    host       : "http://localhost"
+    port       : 3000
+    
+    auth:
+        github:
+            clientID    : ""
+            clientSecret: ""
+
+        facebook:
+            clientID    : ""
+            clientSecret: ""
+
+        vkontakte:
+            clientID    : ""
+            clientSecret: ""
+
+        odnoklassniki:
+            clientID    : ""
+            clientPublic: ""
+            clientSecret: ""

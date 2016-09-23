@@ -1,0 +1,52 @@
+html {
+  font-family: 'Roboto', sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+th {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 300;
+}
+table {
+  width: 100%;
+}
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.25;
+}
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+  color: #fff;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+.button-success {
+  background: #1cb841;
+}
+.button-error {
+  background: #ca3c3c;
+}
+.button-warning {
+  background: #df7514;
+}
+.button-secondary {
+  background: #42b8dd;
+}
+.button-xsmall {
+  font-size: 70%;
+}
+.button-small {
+  font-size: 85%;
+}
+.button-large {
+  font-size: 110%;
+}
+.button-xlarge {
+  font-size: 125%;
+}
