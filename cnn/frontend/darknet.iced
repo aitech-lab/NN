@@ -14,7 +14,7 @@ darknet = spawn '../darknet/darknet', ["yolo", "test", "cfg/yolo.cfg", "nets/yol
 cb = null
 darknet.stdout.on 'data', (data)->
     console.log "stdout: #{data}"
-    if data.indexOf("Enter Image") == 0
+    if data.indexOf("Enter Image") >= 0
         cb?(data)
 
 darknet.stderr.on 'data', (data) ->
