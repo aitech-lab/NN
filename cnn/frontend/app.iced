@@ -65,21 +65,16 @@ console.log cfg
 
     
 # SOCKETS
-keras = require "./keras"
-keras.setcb (data)->
-    io.emit "text", data.toString("utf-8")
+darknet = require "./darknet"
+darknet.setcb (data)->
+    io.emit "image", "new image"
 
-io.on "connection", (socket)->
-
-    socket.on "text", (msg)->
-        keras.predict msg
-
-# TWITTER
-last_tweet = null
-on_tweet = (text)-> 
-    last_tweet = text
-every_10sec = -> 
-    keras.predict last_tweet if last_tweet?
-    last_tweet = null
-setInterval every_10sec, 10000
-require("./twitter").set_callback on_tweet
+# # TWITTER
+# last_tweet = null
+# on_tweet = (text)-> 
+#     last_tweet = text
+# every_10sec = -> 
+#     keras.predict last_tweet if last_tweet?
+#     last_tweet = null
+# setInterval every_10sec, 10000
+# require("./twitter").set_callback on_tweet

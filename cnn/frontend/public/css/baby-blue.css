@@ -1675,3 +1675,22 @@ pre .support.value  {
     font-weight: normal;
     color: #3b8bba; /* skinbuilder block-mine-text-low with #1f8dd6 as primary */
 }
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.fileUpload input.upload {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 34px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}

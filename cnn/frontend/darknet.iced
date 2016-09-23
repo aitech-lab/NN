@@ -2,36 +2,38 @@ spawn = require('child_process').spawn
 
 params = 
     encoding: "utf-8"
-    env: process.env 
-    cwd: "../python"
+    env: process.env
+    cwd: "../darknet"
     stdio:['pipe', 'pipe', 'pipe']
 
-keras = spawn '../python/env/bin/python', ["-u", "predict-pipe.py", "out/final.h5"], params
+#  ./darknet yolo test cfg/yolo.cfg nets/yolo.weights data/dog.jpg
+darknet = spawn '../darknet/darknet', ["yolo", "test", "cfg/yolo.cfg", "nets/yolo.weights"], params
 
 # console.log process.env
 
 cb = null
-keras.stdout.on 'data', (data)->
+darknet.stdout.on 'data', (data)->
     console.log "stdout: #{data}"
-    cb?(data)
+    if data.indexOf("Enter Image") == 0
+        cb?(data)
 
-keras.stderr.on 'data', (data) ->
+darknet.stderr.on 'data', (data) ->
     console.log "stderr: #{data}"
     cb?(data)
 
-keras.on 'close', (code)->
+darknet.on 'close', (code)->
     console.log "child process exited with code #{code}"
     cb?(code)
     process.exit -1
 
-keras.on 'error', (err)->
+darknet.on 'error', (err)->
     console.error "ERROR"
     console.error err
     process.exit -1
 
-predict = (text)->keras.stdin?.write "#{text}\n"
+add_image = (file)->darknet.stdin?.write "../frontend/#{file}\n"
 setcb = (c)-> cb = c
 
 module.exports = 
-    predict: predict
+    add_image: add_image
     setcb  : setcb
