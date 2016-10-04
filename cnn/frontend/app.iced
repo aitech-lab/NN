@@ -7,7 +7,7 @@ coffee  = require "coffee-middleware"
 nib     = require "nib"
 http    = require "http"
 bp      = require "body-parser"
-
+fs      = require "fs"
 
 try cfg = require "./config"
 catch err
@@ -66,8 +66,16 @@ console.log cfg
     
 # SOCKETS
 darknet = require "./darknet"
-darknet.setcb (data)->
-    io.emit "image", "new image"
+darknet.setcb ()->
+    console.log "NEW IMAGE"
+    name = "/i/#{new Date().getTime().toString(36)}.png"
+    try
+        fs.renameSync "../darknet/predictions.png", "public/#{name}"
+    catch
+        console.error "No image :("
+        return 
+    io.emit "image", name
+
 
 # # TWITTER
 # last_tweet = null

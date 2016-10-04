@@ -15,15 +15,13 @@ cb = null
 darknet.stdout.on 'data', (data)->
     console.log "stdout: #{data}"
     if data.indexOf("Enter Image") >= 0
-        cb?(data)
+        cb?()
 
 darknet.stderr.on 'data', (data) ->
     console.log "stderr: #{data}"
-    cb?(data)
 
 darknet.on 'close', (code)->
     console.log "child process exited with code #{code}"
-    cb?(code)
     process.exit -1
 
 darknet.on 'error', (err)->

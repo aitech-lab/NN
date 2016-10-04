@@ -12,23 +12,29 @@ block content
         .fileUpload
           input#uploadFile.pure-u-1-2(placeholder="Загрузите изображение",disabled="disabled")
           &nbsp; 
-          button.pure-button Загрузить
+          #fake.button.pure-button Загрузить
           input#uploadBtn.upload(name="photo",type="file")
         br
-        button.pure-button.pure-button-primary(type="submit") ok
+        //- button.pure-button.pure-button-primary(type="submit") ok
     .pure-u-1(style="padding-left:20px;")
       .header
         h2 Результаты
-
+      #images.pure-u-1
+      
   script(type="text/javascript", charset="utf-8")
 
     :coffeescript
+      fake = $ "#fake"
       btn = $ "#uploadBtn"
       inp = $ "#uploadFile"
-      btn.on "change", (e)-> inp.val btn.val()
-      
+      btn.on "change", (e)-> 
+        $("#form").submit()
+        inp.val btn.val()
+        btn.prop "disabled", true
+        fake.text "Подождите"
+        fake.prop "disabled", true
+        
       submitForm = (e)->
-        console.log e
         e.preventDefault();
         data =  new FormData $(@)[0]
         $.ajax 
@@ -42,11 +48,17 @@ block content
           success    : (data)->
               console.log data
               btn.val("")
+              inp.val("")
+              fake.prop "disabled", false
+              fake.text "Загрузить"
+              btn.prop "disabled", false
           error: (err)-> console.log err
         false
 
       $("#form").submit submitForm
 
-      # socket = io()
+      socket = io()
       # table = $("#table")
-      socket.on "image", (text)-> console.log text
+      images = $("#images")
+      socket.on "image", (url)->
+          images.prepend "<img class='pure-img pure-u-1-2 pure-u-md-1-3 pure-u-lg-1-4' src='#{url}'>"
