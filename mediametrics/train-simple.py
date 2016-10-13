@@ -40,7 +40,7 @@ def load_data(file):
     for l in open(file, "r"):
         d = l.split("\t")
         
-        y = 1.0 if float(d[0])>0 else 0.0 
+        y = int(d[0])
 
         x = [int(x) for x in d[1:]]
         
