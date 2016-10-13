@@ -21,13 +21,13 @@ from keras.callbacks         import ModelCheckpoint
 print("Params:")
 print(sys.argv)
 
-samples_max = 200000
+samples_max  = 200000
 # vocabulary size
 max_features = 60000
 # words in sequence
-maxlen     = 25
+maxlen       = 25
 # samples for descent
-batch_size = 32
+batch_size   = 32
 
 train = sys.argv[1]
 
