@@ -23,7 +23,7 @@ print(sys.argv)
 
 samples_max  = 200000
 # vocabulary size
-max_features = 60000
+max_features = 60500
 # words in sequence
 maxlen       = 25
 # samples for descent
