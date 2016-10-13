@@ -16,10 +16,10 @@ on_line = (l)->
     w.map (a,i)-> words[a]++||words[a]=1 
 
 on_close= ()->
-   list = ([w,v] for w, v of words).sort (a,b)->b[1]-a[1]
-   for w in list
-       console.log "#{w[1]}\t#{w[0]}"
-       # console.log "#{w[0]}"
+    list = ([w,v] for w, v of words).sort (a,b)-> b[1]-a[1]
+    for w in list
+        console.log "#{w[1]}\t#{w[0]}"
+        # console.log "#{w[0]}"
        
 rl.on "line", on_line
 rl.on "close", on_close

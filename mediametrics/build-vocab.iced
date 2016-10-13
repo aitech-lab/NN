@@ -14,24 +14,18 @@ readline = require "readline"
 rl = readline.createInterface
     input: fs.createReadStream inp_name
 
+cleanup = require "./cleanup"
 words = {}
 
-re1 = /\|.*}|&.*?;|[\[\]\(\)\{\}.,:;!?\/\\«»0-9]|\\s/g
-re2 = /[^а-яА-Яa-zA-Z0-9 \-]+/g
-dash = /\s[-\u2012\u2013\u2014\u2015]|[-\u2012\u2013\u2014\u2015]\s|^[-\u2012\u2013\u2014\u2015]|[-\u2012\u2013\u2014\u2015]$/g
-spaces = /\s{2,}/g
-
 rl.on "line", (l)->
+    
     [text, score] = l.split "\t"
-    text = text
-        .replace(re1   , "")
-        .replace(re2   , "")
-        .replace(dash  , "")
-        .replace(spaces, "")
-        .trim()
+    text = cleanup text
     
     w = text.split " "
-    w.map (a)-> words[a] = words[a]+1 | 1
+    w.map (a)->
+        s = a.toLowerCase() 
+        words[s] = words[s]+1 | 1
     # _ text, score
 
 rl.on "close", ()->
