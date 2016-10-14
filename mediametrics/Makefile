@@ -5,7 +5,7 @@ unzip: unzip-news.cpp
 
 push:
 	git commit -am update
-	git pulls
+	git pull
 	git push
 
 pull:
