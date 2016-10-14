@@ -22,6 +22,7 @@ encoded_text = fs.readFileSync(text_file)
         return null unless text? and score?
         enc = voc.encode_line(text).filter (c)-> c>0
         "#{score}\t#{enc.join("\t")}")
+    .filter((l)->l.length>2)
 
 # _ voc.size()
 for l in encoded_text
