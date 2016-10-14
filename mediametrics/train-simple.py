@@ -21,7 +21,7 @@ from keras.callbacks         import ModelCheckpoint
 print("Params:")
 print(sys.argv)
 
-samples_max  = 10000
+samples_max  = 200000
 # vocabulary size
 max_features = 60500
 # words in sequence
@@ -40,7 +40,7 @@ def load_data(file):
     for l in open(file, "r"):
         d = l.split("\t")
         
-        y = int(d[0])
+        y = float(d[0])
 
         x = [int(x) for x in d[1:]]
         
@@ -68,10 +68,10 @@ print("y_train shape:", y_train.shape)
 model = Sequential()
 model.add(Embedding(max_features, 128, input_length=maxlen))
 model.add(LSTM(128, return_sequences=True))
-model.add(LSTM(128, activation='linear'))
+model.add(LSTM(128))
 model.add(Dropout(0.5))
 model.add(Dense(1))
-model.add(Activation('linear'))
+model.add(Activation('sigmoid'))
 
 model.compile(loss='binary_crossentropy',
               optimizer='rmsprop',
