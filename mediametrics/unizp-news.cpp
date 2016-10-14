@@ -1,5 +1,3 @@
-
-
 #include <vector>
 #include <string>
 #include <cstring>
@@ -81,7 +79,7 @@ load_zip(
                 t = strtok(NULL, "\t"); // score
                 if(t) score = stoi(t);
                 t = strtok(NULL, "\n"); // next line
-                if(text != "" && score != 0 && results[text]<score) results[text] = score;
+                if(text != "" && score != 0) results[text] += score;
             }
         }
     }
