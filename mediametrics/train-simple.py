@@ -67,11 +67,11 @@ print("y_train shape:", y_train.shape)
 
 model = Sequential()
 model.add(Embedding(max_features, 128, input_length=maxlen))
-model.add(LSTM(128, return_sequences=True))
-model.add(LSTM(128))
+model.add(LSTM(128, return_sequences=True, activation='relu'))
+model.add(LSTM(128, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(1))
-model.add(Activation('linear'))
+model.add(Activation('relu'))
 
 model.compile(loss='binary_crossentropy',
               optimizer='rmsprop',
