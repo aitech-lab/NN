@@ -1,10 +1,11 @@
 
 
-libzip: unzip-news.cpp
+unzip: unzip-news.cpp
 	g++ -o unzip-news unzip-news.cpp --std=c++11 -lzip
 
 push:
 	git commit -am update
+	git pulls
 	git push
 
 pull:
