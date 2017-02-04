@@ -1,0 +1,3 @@
+[submodule "wiki"]
+	path = wiki
+	url = https://peko:ratatosk@github.com/ailove-lab/nn.wiki.git
